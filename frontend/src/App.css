@@ -1,8 +1,6 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -12,15 +10,16 @@ body {
   color: #333;
 }
 
-.sidebar {
+.sidebar {  
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: 10px;
-  margin-left: 10px;
-  width: clamp(120px, 20vw, 250px);
+  margin-top: 20px;
+  margin-left: 20px;
+  width: clamp(120px, 20vw, 230px);
   max-height: 100vh;
   padding: 10px;
+  padding-bottom: 20px;
   background-color: white;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
   border-radius: 0 5px 5px 0;
@@ -32,11 +31,18 @@ body {
   text-align: center;
 }
 
+.goals-header h3 {
+  margin-top: 0px;
+  margin-bottom: 7px;
+}
+
 .goals-list ul{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 5px;
 }
 
 .goal-item {
@@ -54,9 +60,78 @@ body {
   width: 100%;
   padding: 5px;
   color: #333;
+  font-size: 12px;
+
+}
+
+.goal-item:first-child {
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .goal-item:last-child {
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
+.reflection-panel {
+  position: fixed;
+  top: 20px;
+  left: calc(clamp(120px, 20vw, 230px) + 50px);
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 20px 20px 20px;
+  background-color: white;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.reflection-header {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 7px; 
+}
+
+.reflection-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.reflection-li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.reflection-li:first-child{
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.reflection-li .day-label {
+  min-width: 100px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.reflection-input{
+  background-color: white;
+  border-color: rgba(0,0,0,0.15);
+  border-radius: 5px;
+  width: 100%;
+  padding: 7px;
+  margin: 10px;
+  color: #333;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+  min-height: 60px;
+  overflow: hidden;
+}

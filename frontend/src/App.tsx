@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import './App.css'
 import GoalsSidebar from './components/GoalsSidebar'
+import ReflectionPanel from './components/ReflectionPanel'
 
 function App() {
-  //const [count, setCount] = useState(0)
 
   return (
-    <GoalsSidebar />
+    <div>
+      <GoalsSidebar />
+      <ReflectionPanel/>
+    </div>
+    
   )
 }
 
