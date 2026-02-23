@@ -30,6 +30,11 @@ class ReflectionCreate(BaseModel):
     day: str
     content: str
     created_at: str = date.today().isoformat()
+
+class SummaryCreate(BaseModel):
+    week_start: str
+    content: str
+    created_at: str = date.today().isoformat()
     
 def get_db():
     db = SessionLocal()
@@ -94,4 +99,10 @@ def upsert_reflection(reflection: ReflectionCreate, db: Session = Depends(get_db
         return db_reflection
 
 
-
+# @app.post("/summary")
+# def insertsummary(summary: SummaryCreate, db: Session - Depends(get_db)):
+#     db_summary = models.Summary(**summary.dict())
+#     db.add(db_summary)
+#     db.commit()
+#     db.refresh(db_summary)
+#     return db_summary

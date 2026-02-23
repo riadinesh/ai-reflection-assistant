@@ -15,3 +15,10 @@ class Reflection(Base):
     day = Column(String)
     content = Column(String)
     created_at = Column(String)
+
+class Summary(Base):
+    __tablename__ = "summaries"
+    id = Column(Integer, primary_key=True, index=True)
+    week_start = Column(String)
+    content = Column(String)
+    created_at = Column(String)
