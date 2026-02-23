@@ -30,7 +30,7 @@ def generateContent(goals_list, reflections_list):
         Do NOT include anything outside the JSON.
         Keep the tone encouraging, practical, and concise.
         """
-
+    print("Generating content...")
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1024,
