@@ -1,17 +1,19 @@
 import anthropic
 import os
+import json
+import re
 from dotenv import load_dotenv
 
 load_dotenv()
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-def generateContent(goals_list, reflections_list):
+def generateContent(goals_list, reflections_list, week_start, week_end):
     prompt = f"""
         You are a helpful personal growth assistant.
         The user has the following **big-picture goals**:
         {goals_list}
 
-        Here are the user's **daily reflections for this week**:
+        Here are the user's **daily reflections for the week of {week_start} to {week_end}**:
         {reflections_list}
 
         Instructions:
@@ -24,10 +26,13 @@ def generateContent(goals_list, reflections_list):
         {{
         "summary_text": "Your weekly summary here.",
         "goals_worked_on": ["Goal 1", "Goal 2", ...],
-        "next_steps": ["Next step 1", "Next step 2", ...]
+        "next_steps": ["Next step 1", "Next step 2", ...],
+        "week_start": "{week_start}",
+        "week_end": "{week_end}"
         }}
 
-        Do NOT include anything outside the JSON.
+        Do NOT include anything outside the JSON. Do NOT wrap it in markdown code blocks or backticks.
+        Output raw JSON only, starting with {{ and ending with }}.
         Keep the tone encouraging, practical, and concise.
         """
     print("Generating content...")
@@ -39,4 +44,6 @@ def generateContent(goals_list, reflections_list):
         ]
     )
 
-    return message.content[0].text
+    raw = message.content[0].text
+    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw.strip())
+    return json.loads(cleaned)
