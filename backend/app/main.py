@@ -48,7 +48,6 @@ def get_goals(db: Session = Depends(get_db)):
     goals = db.query(models.Goal).all()
     return [{"id": g.id, "title": g.title} for g in goals]
 
-
 # Function is never used (not creating a goal from scratch)
 # @app.post("/goals")
 # def create_goal(goal: GoalCreate, db: Session = Depends(get_db)): 
@@ -97,12 +96,3 @@ def upsert_reflection(reflection: ReflectionCreate, db: Session = Depends(get_db
         db.commit()
         db.refresh(db_reflection)
         return db_reflection
-
-
-# @app.post("/summary")
-# def insertsummary(summary: SummaryCreate, db: Session - Depends(get_db)):
-#     db_summary = models.Summary(**summary.dict())
-#     db.add(db_summary)
-#     db.commit()
-#     db.refresh(db_summary)
-#     return db_summary
