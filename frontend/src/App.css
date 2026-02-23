@@ -33,7 +33,7 @@ body {
 
 .goals-header h3 {
   margin-top: 0px;
-  margin-bottom: 7px;
+  margin-bottom: 11px;
 }
 
 .goals-list ul{
@@ -86,11 +86,56 @@ body {
   overflow-y: auto;
 }
 
-.reflection-header {
+.reflection-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 7px; 
+  padding-top: 0;
+  padding-bottom: 6px;
+  /* margin-left: 7px;
+  margin-right: 7px; */
 }
+
+.reflection-header-container h3,
+.reflection-header-container h4 {
+  margin: 0;
+}
+
+.reflection-week-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.week-range-label {
+  font-size: 14px;
+  color: gray;
+}
+
+.reflection-week-nav-btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+                                                                                                                                                                                                  
+.week-nav-btn {
+  background: none;
+  padding: 0px 3px 2px 0px;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  color: gray;
+}
+
+.week-nav-btn:disabled {          
+  color: #ccc;                                                                                      
+  cursor: default;                                                                                  
+}     
+
 
 .reflection-list {
   display: flex;

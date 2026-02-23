@@ -1,19 +1,41 @@
 import React, { useState, useEffect } from 'react'
+
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-function getWeekStart(): string {
+function getMondayOfWeek(offset: number = 0): Date {
     const today = new Date()
     const day = today.getDay()
-    const diff = today.getDate() - day + (day === 0 ? -6 : 1)
-    const monday = new Date(today.setDate(diff))
-    return monday.toISOString().split('T')[0]
+    const diff = today.getDate() - day + (day === 0 ? -6 : 1) + (offset * 7)
+    return new Date(today.getFullYear(), today.getMonth(), diff)
 }
+
+function formatISODate(date: Date): string {
+    return date.toISOString().split('T')[0]
+}
+
+function formatLabel(date: Date): string {
+    return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+}
+
 
 type Reflection = { id: number, day: string, content: string }
 
 export function reflectionActions() {
-    const weekStart = getWeekStart()
+    const [weekOffset, setWeekOffset] = useState(0)
+    const monday = getMondayOfWeek(weekOffset)
+    const sunday = new Date(monday)
+    sunday.setDate(sunday.getDate() + 6)
+
+    const weekStart = formatISODate(monday)
+    const dateRangeLabel = `${formatLabel(monday)} - ${formatLabel(sunday)}`
+
     const [reflectionMap, setReflectionMap] = useState<Record<string, Reflection>>({})
+
+    // Navigation to previous/next week
+    // When offset changes (state changes), page re-renders and useEffect runs with a new weekStart
+    const goToPreviousWeek = () => setWeekOffset(prev => prev - 1)
+    const goToNextWeek = () => setWeekOffset(prev => prev + 1)
+    const isCurrentWeek = weekOffset === 0 // If on current week, disable next week button
 
     useEffect(() => {
         fetch(`http://localhost:8000/reflections?week_start=${weekStart}`)
@@ -22,7 +44,7 @@ export function reflectionActions() {
                 const map = Object.fromEntries(data.map((r: Reflection) => [r.day, r]))
                 setReflectionMap(map)
             })
-    }, [])
+    }, [weekStart])
 
     const handleContentChange = (day: string, e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setReflectionMap(prev => ({
@@ -36,9 +58,8 @@ export function reflectionActions() {
 
     const handleKeyPress = (day: string, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            console.log(weekStart)
             e.currentTarget.blur()
-            fetch("http://localhost:8000/reflections?week_start=" + weekStart, {
+            fetch("http://localhost:8000/reflections", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -50,5 +71,5 @@ export function reflectionActions() {
         }
     }
 
-    return { days: DAYS, reflectionMap, handleContentChange, handleKeyPress }
+    return { days: DAYS, reflectionMap, dateRangeLabel, handleContentChange, handleKeyPress, goToPreviousWeek, goToNextWeek, isCurrentWeek }
 }

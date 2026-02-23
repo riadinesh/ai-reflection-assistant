@@ -1,11 +1,21 @@
 import { reflectionActions } from '../hooks/ReflectionActions'
 
 export default function ReflectionPanel() {
-    const { days, reflectionMap, handleContentChange, handleKeyPress } = reflectionActions()
+    const { days, reflectionMap, dateRangeLabel, handleContentChange, handleKeyPress, goToPreviousWeek, goToNextWeek, isCurrentWeek } = reflectionActions()
 
     return (
         <div className="reflection-panel">
-            <h3 className="reflection-header">This Week's Reflections</h3>
+            <div className="reflection-header-container">
+                <h3 className="reflection-header">This Week's Reflections</h3>
+                <div className="reflection-week-nav">
+                    <span className="week-range-label">{dateRangeLabel}</span>
+                    <div className="reflection-week-nav-btns">
+                        <button className="week-nav-btn" onClick={goToPreviousWeek}>{"<"}</button>
+                        {/* if on current week, disable next week button */}
+                        <button className="week-nav-btn" onClick={goToNextWeek} disabled={isCurrentWeek}>{">"}</button>
+                    </div>
+                </div>
+            </div>
             <ul className="reflection-list">
                 {days.map(day => (
                     <li key={day} className="reflection-li">
