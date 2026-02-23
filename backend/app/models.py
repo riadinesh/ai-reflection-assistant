@@ -15,4 +15,3 @@ class Reflection(Base):
     day = Column(String)
     content = Column(String)
     created_at = Column(String)
-
