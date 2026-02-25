@@ -30,7 +30,7 @@ newSummary = createMessage(summary)
 print(newSummary)
 sendEmail(newSummary, week_start, week_end)
 
-db_summary = models.Summary(week_start=week_start, content=summary, created_at=datetime.date.today().isoformat())
+db_summary = models.Summary(week_start=week_start, content=summary['summary_text'], created_at=datetime.date.today().isoformat())
 db.add(db_summary)
 db.commit()
 db.close()
