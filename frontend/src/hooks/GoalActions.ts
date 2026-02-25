@@ -12,13 +12,14 @@ export function goalActions() {
     }, [])
 
     // Edit goal
-    const handleEditGoal = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleEditGoal = (id: number, e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setGoals(goals.map(g => g.id === id ? { ...g, title: e.target.value } : g))
     }
 
     // Update goal on database
-    const handleKeyPress = (id: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyPress = (id: number, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
+            e.preventDefault()
             e.currentTarget.blur()
             fetch("http://localhost:8000/goals/" + id, {
                 method: "PUT",

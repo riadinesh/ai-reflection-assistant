@@ -12,8 +12,7 @@ export default function GoalsSidebar() {
                 <ul>
                     {goals.map(goal => (
                         <li key={goal.id} className="goal-item">
-                            <input
-                                type="text"
+                            <textarea
                                 value={goal.title}
                                 onChange={(e) => handleEditGoal(goal.id, e)}
                                 onKeyDown={(e) => handleKeyPress(goal.id, e)}
