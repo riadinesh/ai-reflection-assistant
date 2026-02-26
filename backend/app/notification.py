@@ -15,7 +15,7 @@ def createMessage(summary):
     return message
 def sendEmail(summary, week_start, week_end):
     params = {
-          "from": "Reflections <reflections@resend.dev>",  # use this for testing
+          "from": "Reflections <onboarding@resend.dev>",  # use this for testing
           "to": [os.getenv("EMAIL")],
           "subject": f"Your Weekly Reflection Summary: {week_start} to {week_end}",
           "html": f"<h2>Your Weekly Reflection Summary</h2><p>{summary.replace(chr(10), '<br>')}</p>",
