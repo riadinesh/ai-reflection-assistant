@@ -1,2 +1,3 @@
 backend/.env
 backend/projectDatabase.db
+backend/app/seed.py
