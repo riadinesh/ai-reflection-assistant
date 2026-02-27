@@ -1,7 +1,7 @@
 import { goalActions } from '../hooks/GoalActions'
 
 export default function GoalsSidebar() {
-    const { goals, handleEditGoal, handleKeyPress } = goalActions()
+    const { goals, handleEditGoal, handleKeyPress, handleEditDescription, handleDescriptionKeyPress, handleAddGoal, handleDeleteGoal } = goalActions()
 
     return (
         <div className="sidebar">
@@ -12,14 +12,40 @@ export default function GoalsSidebar() {
                 <ul>
                     {goals.map(goal => (
                         <li key={goal.id} className="goal-item">
-                            <textarea
-                                value={goal.title}
-                                onChange={(e) => handleEditGoal(goal.id, e)}
-                                onKeyDown={(e) => handleKeyPress(goal.id, e)}
-                            />
+                            <button className="delete-goal-btn" onClick={() => handleDeleteGoal(goal.id)}>✕</button>
+                            <div className="goal-content">
+                                <textarea
+                                    className="goal-title-input"
+                                    value={goal.title}
+                                    placeholder="Goal title..."
+                                    onChange={(e) => handleEditGoal(goal.id, e)}
+                                    onKeyDown={(e) => handleKeyPress(goal.id, e)}
+                                />
+                                <textarea
+                                    className="goal-description-input"
+                                    value={goal.description}
+                                    placeholder="Add a description..."
+                                    onChange={(e) => handleEditDescription(goal.id, e)}
+                                    onKeyDown={(e) => handleDescriptionKeyPress(goal.id, e)}
+                                    onInput={(e) => {
+                                        const el = e.target as HTMLTextAreaElement
+                                        el.style.height = 'auto'
+                                        el.style.height = el.scrollHeight + 'px'
+                                    }}
+                                />
+                            </div>
                         </li>
                     ))}
                 </ul>
+            </div>
+            <div className="goals-footer">
+                <button
+                    className="add-goal-btn"
+                    onClick={handleAddGoal}
+                    disabled={goals.length >= 5}
+                >
+                    + Add Goal
+                </button>
             </div>
         </div>
     )
