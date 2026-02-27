@@ -6,11 +6,12 @@
 body {
   margin: 0;
   font-family: Inter;
-  background-color: #f7f8fb;
-  color: #333;
+  background: linear-gradient(150deg, #faf6ef 0%, #fef0e0 100%);
+  min-height: 100vh;
+  color: #2d2417;
 }
 
-.sidebar {  
+.sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,9 +21,9 @@ body {
   max-height: 100vh;
   padding: 10px;
   padding-bottom: 20px;
-  background-color: white;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  border-radius: 0 5px 5px 0;
+  background-color: #fdebd8;
+  box-shadow: 2px 2px 16px rgba(180, 100, 40, 0.15);
+  border-radius: 0 12px 12px 0;
   overflow-y: auto;
   text-align: left;
 }
@@ -32,11 +33,15 @@ body {
 }
 
 .goals-header h3 {
-  margin-top: 0px;
+  margin-top: 4px;
   margin-bottom: 11px;
+  color: #a85f30;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.goals-list ul{
+.goals-list ul {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,10 +52,16 @@ body {
 
 .goal-item {
   list-style-type: none;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(168, 95, 48, 0.15);
   padding: 5px;
   width: 90%;
   display: flex;
+  transition: border-left 0.15s;
+}
+
+.goal-item:hover {
+  border-left: 3px solid #c2855a;
+  padding-left: 3px;
 }
 
 .goal-content {
@@ -60,12 +71,12 @@ body {
 }
 
 .goal-title-input {
-  background-color: white;
+  background-color: transparent;
   border: none;
   border-radius: 5px;
   width: 100%;
   padding: 5px;
-  color: #333;
+  color: #2d2417;
   font-size: 12px;
   font-weight: 600;
   resize: none;
@@ -75,12 +86,12 @@ body {
 }
 
 .goal-description-input {
-  background-color: white;
+  background-color: transparent;
   border: none;
   border-radius: 5px;
   width: 100%;
   padding: 3px 5px;
-  color: #888;
+  color: #9e7a5e;
   font-size: 11px;
   resize: none;
   overflow: hidden;
@@ -91,7 +102,7 @@ body {
 .delete-goal-btn {
   background: none;
   border: none;
-  color: #ccc;
+  color: #d4ab8e;
   font-size: 11px;
   cursor: pointer;
   padding: 2px 4px;
@@ -106,36 +117,37 @@ body {
 .goals-footer {
   display: flex;
   justify-content: center;
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 .add-goal-btn {
-  background: none;
-  border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 5px;
-  padding: 5px 12px;
+  background-color: #c2855a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
   font-size: 12px;
   font-family: inherit;
-  color: #555;
+  color: white;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .add-goal-btn:hover:not(:disabled) {
-  background-color: #f0f0f0;
+  background-color: #a8693e;
 }
 
 .add-goal-btn:disabled {
-  color: #bbb;
-  border-color: rgba(0,0,0,0.1);
+  background-color: #e8cdb8;
+  color: #c4a48e;
   cursor: default;
 }
 
 .goal-item:first-child {
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(168, 95, 48, 0.15);
 }
 
 .goal-item:last-child {
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(168, 95, 48, 0.15);
 }
 
 .reflection-panel {
@@ -145,9 +157,9 @@ body {
   right: 20px;
   bottom: 20px;
   padding: 10px 20px 20px 20px;
-  background-color: white;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  border-radius: 5px;
+  background-color: #fffcf8;
+  box-shadow: 2px 2px 16px rgba(180, 100, 40, 0.12);
+  border-radius: 12px;
   text-align: left;
   overflow-y: auto;
 }
@@ -157,16 +169,22 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
   padding-top: 0;
-  padding-bottom: 6px;
-  /* margin-left: 7px;
-  margin-right: 7px; */
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(168, 95, 48, 0.12);
+  margin-bottom: 4px;
 }
 
 .reflection-header-container h3,
 .reflection-header-container h4 {
   margin: 0;
+}
+
+.reflection-header {
+  color: #a85f30;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .reflection-week-nav {
@@ -178,7 +196,7 @@ body {
 
 .week-range-label {
   font-size: 14px;
-  color: gray;
+  color: #b8927a;
 }
 
 .reflection-week-nav-btns {
@@ -187,21 +205,20 @@ body {
   align-items: center;
   gap: 15px;
 }
-                                                                                                                                                                                                  
+
 .week-nav-btn {
   background: none;
   padding: 0px 3px 2px 0px;
   border: none;
   cursor: pointer;
   font-size: 25px;
-  color: gray;
+  color: #c2855a;
 }
 
-.week-nav-btn:disabled {          
-  color: #ccc;                                                                                      
-  cursor: default;                                                                                  
-}     
-
+.week-nav-btn:disabled {
+  color: #e0c4aa;
+  cursor: default;
+}
 
 .reflection-list {
   display: flex;
@@ -217,32 +234,43 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(168, 95, 48, 0.08);
 }
 
-.reflection-li:first-child{
-  border-top: 1px solid rgba(0,0,0,0.1);
+.reflection-li:first-child {
+  border-top: 1px solid rgba(168, 95, 48, 0.08);
 }
 
 .reflection-li .day-label {
-  min-width: 100px;
-  font-size: 16px;
-  font-weight: bold;
+  min-width: 80px;
+  font-size: 12px;
+  font-weight: 600;
   margin-right: 10px;
   text-align: center;
+  color: #a85f30;
+  background-color: #fdebd8;
+  border-radius: 20px;
+  padding: 4px 10px;
+  white-space: nowrap;
 }
 
-.reflection-input{
-  background-color: white;
-  border-color: rgba(0,0,0,0.15);
-  border-radius: 5px;
+.reflection-input {
+  background-color: #fffaf5;
+  border-color: rgba(180, 120, 60, 0.15);
+  border-radius: 6px;
   width: 100%;
   padding: 7px;
   margin: 10px;
-  color: #333;
+  color: #2d2417;
   font-family: inherit;
   font-size: inherit;
   resize: none;
   min-height: 60px;
   overflow: hidden;
+}
+
+.reflection-input:focus {
+  outline: none;
+  border-color: #c2855a;
+  background-color: #fffdf9;
 }
