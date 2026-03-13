@@ -1,4 +1,5 @@
 # AI Reflection Assistant
+<img width="1471" height="767" alt="Screenshot 2026-03-12 at 11 49 04 PM" src="https://github.com/user-attachments/assets/dc6b8d08-ad27-4c7c-b400-20d9bc556540" />
 
 A personal growth tool for tracking daily reflections against your big-picture goals. Every Sunday, it generates a weekly AI summary and emails it to you — covering what you accomplished, goals you made progress on, and next steps for the week ahead.
 
