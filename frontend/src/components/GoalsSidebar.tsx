@@ -44,7 +44,7 @@ export default function GoalsSidebar() {
                     onClick={handleAddGoal}
                     disabled={goals.length >= 5}
                 >
-                    + Add Goal
+                    + add goal
                 </button>
             </div>
         </div>

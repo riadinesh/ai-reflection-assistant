@@ -21,9 +21,10 @@ def getDate():
 @router.post("/summarize")
 def summarize(db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
     goals = db.query(models.Goal).filter(models.Goal.user_id == current_user.id).all() 
+    user_email = current_user.email
     week_start, week_end = getDate()
 
-    reflections = db.query(models.Reflection).filter(models.Reflection.week_start == week_start and models.Reflection.user_id == current_user.id).all()
+    reflections = db.query(models.Reflection).filter(models.Reflection.week_start == week_start, models.Reflection.user_id == current_user.id).all()
     goals_list = []
     reflections_list = []
     for goal in goals:
@@ -35,7 +36,7 @@ def summarize(db: Session = Depends(get_db), current_user = Depends(_get_current
     summary = generateContent(goals_list, reflections_list, week_start, week_end)
     newSummary = createMessage(summary)
     # print(newSummary)
-    # sendEmail(newSummary, week_start, week_end)
+    # sendEmail(newSummary, week_start, week_end, user_email)
 
     db_summary = models.Summary(week_start=week_start, user_id=current_user.id, content=summary['summary_text'], created_at=datetime.date.today().isoformat())
     db.add(db_summary)

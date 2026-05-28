@@ -1,7 +1,24 @@
+import { useState } from 'react'
 import { reflectionActions } from '../hooks/ReflectionActions'
 
 export default function ReflectionPanel() {
     const { days, reflectionMap, dateRangeLabel, handleContentChange, handleKeyPress, goToPreviousWeek, goToNextWeek, isCurrentWeek } = reflectionActions()
+    const [summarizing, setSummarizing] = useState(false)
+
+    async function handleGenerateSummary() {
+        setSummarizing(true)
+        try {
+            await fetch('http://localhost:8000/summarize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+        } finally {
+            setSummarizing(false)
+        }
+    }
 
     return (
         <div className="reflection-panel">
@@ -22,7 +39,7 @@ export default function ReflectionPanel() {
                         <span className="day-label">{day}</span>
                         <textarea
                             className="reflection-input"
-                            placeholder="Write your reflection..."
+                            placeholder="write your reflection..."
                             value={reflectionMap[day]?.content ?? ""}
                             onChange={(e) => handleContentChange(day, e)}
                             onKeyDown={(e) => handleKeyPress(day, e)}
@@ -30,6 +47,11 @@ export default function ReflectionPanel() {
                     </li>
                 ))}
             </ul>
+            <div className="reflection-footer">
+                <button className="generate-summary-btn" onClick={handleGenerateSummary} disabled={summarizing}>
+                    {summarizing ? 'generating...' : 'generate summary'}
+                </button>
+            </div>
         </div>
     )
 }
