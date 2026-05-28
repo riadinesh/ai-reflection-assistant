@@ -4,9 +4,12 @@ import React, { useState, useEffect } from 'react'
 export function goalActions() {
     const [goals, setGoals] = useState<{id: number, title: string, description: string}[]>([])
 
+    const token = localStorage.getItem('token')
+    const authHeaders = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+
     // On first render, load goals
     useEffect(() => {
-        fetch("http://localhost:8000/goals")
+        fetch("http://localhost:8000/goals", { headers: authHeaders })
             .then(res => res.json())
             .then(data => setGoals(data))
     }, [])
@@ -25,7 +28,7 @@ export function goalActions() {
             if (!goal) return
             fetch("http://localhost:8000/goals/" + id, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: authHeaders,
                 body: JSON.stringify({ title: goal.title, description: goal.description })
             })
         }
@@ -45,7 +48,7 @@ export function goalActions() {
             if (!goal) return
             fetch("http://localhost:8000/goals/" + id, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: authHeaders,
                 body: JSON.stringify({ title: goal.title, description: goal.description })
             })
         }
@@ -53,7 +56,7 @@ export function goalActions() {
 
     // Delete a goal
     const handleDeleteGoal = (id: number) => {
-        fetch("http://localhost:8000/goals/" + id, { method: "DELETE" })
+        fetch("http://localhost:8000/goals/" + id, { method: "DELETE", headers: authHeaders })
             .then(() => setGoals(goals.filter(g => g.id !== id)))
     }
 
@@ -61,7 +64,7 @@ export function goalActions() {
     const handleAddGoal = () => {
         fetch("http://localhost:8000/goals", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders,
             body: JSON.stringify({ title: "", description: "" })
         })
             .then(res => res.json())

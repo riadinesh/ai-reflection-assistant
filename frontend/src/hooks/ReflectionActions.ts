@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+const token = localStorage.getItem('token')
+const authHeaders = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
 
 function getMondayOfWeek(offset: number = 0): Date {
     const today = new Date()
@@ -38,7 +40,7 @@ export function reflectionActions() {
     const isCurrentWeek = weekOffset === 0 // If on current week, disable next week button
 
     useEffect(() => {
-        fetch(`http://localhost:8000/reflections?week_start=${weekStart}`)
+        fetch(`http://localhost:8000/reflections?week_start=${weekStart}`, { headers: authHeaders })
             .then(res => res.json())
             .then(data => {
                 const map = Object.fromEntries(data.map((r: Reflection) => [r.day, r]))
@@ -61,7 +63,7 @@ export function reflectionActions() {
             e.currentTarget.blur()
             fetch("http://localhost:8000/reflections", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: authHeaders,
                 body: JSON.stringify({
                     week_start: weekStart,
                     day: day,
