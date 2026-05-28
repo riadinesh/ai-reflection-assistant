@@ -1,3 +1,7 @@
 backend/.env
 backend/projectDatabase.db
 backend/app/seed.py
+backend/venv/
+venv/
+**/__pycache__/
+.vscode/
