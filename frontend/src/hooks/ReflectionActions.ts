@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-const token = localStorage.getItem('token')
-const authHeaders = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
-
 function getMondayOfWeek(offset: number = 0): Date {
     const today = new Date()
     const day = today.getDay()
@@ -23,6 +20,9 @@ function formatLabel(date: Date): string {
 type Reflection = { id: number, day: string, content: string }
 
 export function reflectionActions() {
+    const token = localStorage.getItem('token')
+    const authHeaders = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+
     const [weekOffset, setWeekOffset] = useState(0)
     const monday = getMondayOfWeek(weekOffset)
     const sunday = new Date(monday)
