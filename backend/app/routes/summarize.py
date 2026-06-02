@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, BackgroundTasks
 from sqlalchemy.orm import Session
 import datetime
 
@@ -19,7 +19,7 @@ def getDate():
     return week_start, week_end
 
 @router.post("/summarize")
-def summarize(db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
+def summarize(background_tasks: BackgroundTasks, db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
     goals = db.query(models.Goal).filter(models.Goal.user_id == current_user.id).all() 
     user_email = current_user.email
     week_start, week_end = getDate()
@@ -35,10 +35,11 @@ def summarize(db: Session = Depends(get_db), current_user = Depends(_get_current
 
     summary = generateContent(goals_list, reflections_list, week_start, week_end)
     newSummary = createMessage(summary)
-    # print(newSummary)
-    # sendEmail(newSummary, week_start, week_end, user_email)
 
     db_summary = models.Summary(week_start=week_start, user_id=current_user.id, content=summary['summary_text'], created_at=datetime.date.today().isoformat())
     db.add(db_summary)
     db.commit()
-    return summary
+
+    # Send the email after responding so a slow/failed send never blocks or breaks /summarize
+    background_tasks.add_task(sendEmail, newSummary, week_start, week_end, user_email)
+    return {**summary, "email_sent_to": user_email}

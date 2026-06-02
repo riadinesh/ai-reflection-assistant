@@ -11,7 +11,6 @@ router = APIRouter()
 
 @router.get("/reflections")
 def get_reflections(week_start: str, db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
-    print("current user ID: ", current_user.id)
     reflections = db.query(models.Reflection).filter(
         models.Reflection.week_start == week_start, models.Reflection.user_id == current_user.id
     ).all()

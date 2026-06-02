@@ -1,20 +1,25 @@
 import { useState } from 'react'
 import { reflectionActions } from '../hooks/ReflectionActions'
+import { API_URL } from '../config'
 
 export default function ReflectionPanel() {
     const { days, reflectionMap, dateRangeLabel, handleContentChange, handleKeyPress, goToPreviousWeek, goToNextWeek, isCurrentWeek } = reflectionActions()
     const [summarizing, setSummarizing] = useState(false)
+    const [sentTo, setSentTo] = useState<string | null>(null)
 
     async function handleGenerateSummary() {
         setSummarizing(true)
+        setSentTo(null)
         try {
-            await fetch('http://localhost:8000/summarize', {
+            const res = await fetch(`${API_URL}/summarize`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
+            const data = await res.json()
+            setSentTo(data.email_sent_to)
         } finally {
             setSummarizing(false)
         }
@@ -51,6 +56,7 @@ export default function ReflectionPanel() {
                 <button className="generate-summary-btn" onClick={handleGenerateSummary} disabled={summarizing}>
                     {summarizing ? 'generating...' : 'generate summary'}
                 </button>
+                {sentTo && <span className="email-sent-msg">email sent to {sentTo}!</span>}
             </div>
         </div>
     )

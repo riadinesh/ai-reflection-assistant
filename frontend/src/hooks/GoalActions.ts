@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import type { Goal } from '../types/Goals'
+import { API_URL } from '../config'
 
 // Function imported into GoalsSidebar.tsx
 export function goalActions() {
-    const [goals, setGoals] = useState<{id: number, title: string, description: string}[]>([])
+    const [goals, setGoals] = useState<Goal[]>([])
 
     const token = localStorage.getItem('token')
     const authHeaders = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
 
     // On first render, load goals
     useEffect(() => {
-        fetch("http://localhost:8000/goals", { headers: authHeaders })
+        fetch(`${API_URL}/goals`, { headers: authHeaders })
             .then(res => res.json())
             .then(data => setGoals(data))
     }, [])
@@ -26,7 +28,7 @@ export function goalActions() {
             e.currentTarget.blur()
             const goal = goals.find(g => g.id === id)
             if (!goal) return
-            fetch("http://localhost:8000/goals/" + id, {
+            fetch(`${API_URL}/goals/${id}`, {
                 method: "PUT",
                 headers: authHeaders,
                 body: JSON.stringify({ title: goal.title, description: goal.description })
@@ -46,7 +48,7 @@ export function goalActions() {
             e.currentTarget.blur()
             const goal = goals.find(g => g.id === id)
             if (!goal) return
-            fetch("http://localhost:8000/goals/" + id, {
+            fetch(`${API_URL}/goals/${id}`, {
                 method: "PUT",
                 headers: authHeaders,
                 body: JSON.stringify({ title: goal.title, description: goal.description })
@@ -56,13 +58,13 @@ export function goalActions() {
 
     // Delete a goal
     const handleDeleteGoal = (id: number) => {
-        fetch("http://localhost:8000/goals/" + id, { method: "DELETE", headers: authHeaders })
+        fetch(`${API_URL}/goals/${id}`, { method: "DELETE", headers: authHeaders })
             .then(() => setGoals(goals.filter(g => g.id !== id)))
     }
 
     // Add a new blank goal
     const handleAddGoal = () => {
-        fetch("http://localhost:8000/goals", {
+        fetch(`${API_URL}/goals`, {
             method: "POST",
             headers: authHeaders,
             body: JSON.stringify({ title: "", description: "" })

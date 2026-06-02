@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { API_URL } from '../config'
 
 interface AuthProps {
   onAuthSuccess: (token: string) => void
@@ -22,7 +23,7 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
         ? { username, email, password }
         : { username, password }
 
-      const res = await fetch(`http://localhost:8000${endpoint}`, {
+      const res = await fetch(`${API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

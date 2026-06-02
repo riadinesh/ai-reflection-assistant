@@ -302,9 +302,16 @@ body {
 
 .reflection-footer {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 12px;
   padding-top: 14px;
   margin-top: auto;
+}
+
+.email-sent-msg {
+  font-size: 12px;
+  color: #a85f30;
 }
 
 .generate-summary-btn {

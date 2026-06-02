@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import type { Reflection } from '../types/Reflections'
+import { API_URL } from '../config'
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 function getMondayOfWeek(offset: number = 0): Date {
@@ -16,8 +18,6 @@ function formatLabel(date: Date): string {
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
 }
 
-
-type Reflection = { id: number, day: string, content: string }
 
 export function reflectionActions() {
     const token = localStorage.getItem('token')
@@ -40,7 +40,7 @@ export function reflectionActions() {
     const isCurrentWeek = weekOffset === 0 // If on current week, disable next week button
 
     useEffect(() => {
-        fetch(`http://localhost:8000/reflections?week_start=${weekStart}`, { headers: authHeaders })
+        fetch(`${API_URL}/reflections?week_start=${weekStart}`, { headers: authHeaders })
             .then(res => res.json())
             .then(data => {
                 const map = Object.fromEntries(data.map((r: Reflection) => [r.day, r]))
@@ -61,7 +61,7 @@ export function reflectionActions() {
     const handleKeyPress = (day: string, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             e.currentTarget.blur()
-            fetch("http://localhost:8000/reflections", {
+            fetch(`${API_URL}/reflections`, {
                 method: "POST",
                 headers: authHeaders,
                 body: JSON.stringify({

@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -7,9 +9,13 @@ from app.routes import goals, reflections, summarize, auth
 init_db()
 app = FastAPI()
 
+# Comma-separated list of allowed frontend origins. Set FRONTEND_URL in prod to
+# your Vercel domain (e.g. "https://your-app.vercel.app"); defaults to local dev.
+allowed_origins = os.getenv("FRONTEND_URL", "http://localhost:5173").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )

@@ -7,7 +7,9 @@ import os
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(DATABASE_URL)
+# pool_pre_ping checks a connection is alive before using it, so requests after
+# Neon's idle auto-suspend transparently reconnect instead of erroring.
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
