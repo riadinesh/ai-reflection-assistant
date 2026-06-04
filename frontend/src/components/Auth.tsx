@@ -13,7 +13,8 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit() {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     setError('')
     setLoading(true)
 
@@ -64,7 +65,7 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
           </button>
         </div>
 
-        <div className="auth-form">
+        <form className="auth-form" onSubmit={handleSubmit}>
           <div className="auth-field">
             <label className="auth-label">username</label>
             <input
@@ -104,12 +105,12 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
 
           <button
             className="auth-submit-btn"
-            onClick={handleSubmit}
+            type="submit"
             disabled={loading}
           >
             {loading ? 'please wait...' : mode === 'login' ? 'log in' : 'create account'}
           </button>
-        </div>
+        </form>
       </div>
     </div>
   )
