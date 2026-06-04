@@ -17,7 +17,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: 20px;
+  margin-top: 64px;
   margin-left: 20px;
   width: clamp(120px, 20vw, 230px);
   max-height: 100vh;
@@ -175,7 +175,7 @@ body {
 
 .reflection-panel {
   position: fixed;
-  top: 20px;
+  top: 64px;
   left: calc(clamp(120px, 20vw, 230px) + 50px);
   right: 20px;
   bottom: 20px;
@@ -525,4 +525,117 @@ body {
 
 .auth-submit-btn:hover {
   background-color: #a8693e;
+}
+
+/* ===== Header ===== */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background-color: rgba(253, 235, 216, 0.92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 10px rgba(180, 100, 40, 0.12);
+  z-index: 700;
+}
+
+.app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #a85f30;
+}
+
+.app-header-tagline {
+  font-size: 12px;
+  color: #a08a76;
+}
+
+/* ===== Profile menu ===== */
+.profile-menu {
+  position: relative;
+}
+
+.profile-icon {
+  box-sizing: border-box;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background-color: #e8cdb8;
+  color: #a85f30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(180, 100, 40, 0.18);
+  transition: background-color 0.15s;
+}
+
+.profile-icon:hover {
+  background-color: #ddbfa6;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  width: 200px;
+  background-color: #fffdf9;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(60, 40, 25, 0.18);
+  padding: 6px;
+  overflow: hidden;
+}
+
+.profile-info {
+  padding: 10px 12px 8px;
+}
+
+.profile-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d2417;
+}
+
+.profile-email {
+  font-size: 12px;
+  color: #a08a76;
+  margin-top: 2px;
+  word-break: break-all;
+}
+
+.profile-divider {
+  height: 1px;
+  background-color: rgba(168, 95, 48, 0.15);
+  margin: 4px 0;
+}
+
+.profile-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #4a3b2e;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.profile-dropdown-item:hover {
+  background-color: #f7ece1;
 }
