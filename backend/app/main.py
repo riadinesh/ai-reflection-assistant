@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_db
-from app.routes import goals, reflections, summarize, auth
+from app.routes import goals, reflections, summarize, auth, profile
 
 init_db()
 app = FastAPI()
@@ -20,6 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(profile.router)
 app.include_router(goals.router)
 app.include_router(reflections.router)
 app.include_router(summarize.router)

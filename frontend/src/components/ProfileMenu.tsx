@@ -3,10 +3,11 @@ import { useState, useRef, useEffect } from 'react'
 interface ProfileMenuProps {
     username: string
     email: string
+    onSettings: () => void
     onLogout: () => void
 }
 
-export default function ProfileMenu({ username, email, onLogout }: ProfileMenuProps) {
+export default function ProfileMenu({ username, email, onSettings, onLogout }: ProfileMenuProps) {
     const [open, setOpen] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
 
@@ -37,7 +38,7 @@ export default function ProfileMenu({ username, email, onLogout }: ProfileMenuPr
                         <div className="profile-email">{email}</div>
                     </div>
                     <div className="profile-divider" />
-                    <button className="profile-dropdown-item">Settings</button>
+                    <button className="profile-dropdown-item" onClick={() => { setOpen(false); onSettings() }}>Settings</button>
                     <div className="profile-divider" />
                     <button className="profile-dropdown-item" onClick={onLogout}>Logout</button>
                 </div>

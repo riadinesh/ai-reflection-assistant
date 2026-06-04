@@ -17,7 +17,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  margin-top: 64px;
+  margin-top: 55px;
   margin-left: 20px;
   width: clamp(120px, 20vw, 230px);
   max-height: 100vh;
@@ -175,7 +175,7 @@ body {
 
 .reflection-panel {
   position: fixed;
-  top: 64px;
+  top: 55px;
   left: calc(clamp(120px, 20vw, 230px) + 50px);
   right: 20px;
   bottom: 20px;
@@ -527,13 +527,129 @@ body {
   background-color: #a8693e;
 }
 
+.past-reflections-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: clamp(120px, 20vw, 230px);
+  background-color: #e8cdb8;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #a85f30;
+  cursor: pointer;
+  text-align: center;
+}
+
+.past-reflections-btn:hover {
+  background-color: #ddbfa6;
+}
+
+/* ===== Settings modal ===== */
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(60, 40, 25, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.settings-modal {
+  position: relative;
+  background-color: #fffdf9;
+  border-radius: 12px;
+  padding: 28px 32px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 12px 40px rgba(60, 40, 25, 0.25);
+}
+
+.settings-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  color: #a85f30;
+  cursor: pointer;
+}
+
+.settings-title {
+  margin: 0 0 20px;
+  font-size: 18px;
+  color: #a85f30;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a85f30;
+  text-transform: lowercase;
+}
+
+.settings-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #2d2417;
+  background-color: #fffaf5;
+  border: 1px solid rgba(180, 120, 60, 0.25);
+  border-radius: 6px;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: #c2855a;
+  background-color: #fffdf9;
+}
+
+.settings-save-btn {
+  margin-top: 4px;
+  align-self: flex-end;
+  background-color: #c2855a;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+
+.settings-save-btn:hover {
+  background-color: #a8693e;
+}
+
 /* ===== Header ===== */
 .app-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 52px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: space-between;

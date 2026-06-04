@@ -25,3 +25,7 @@ class GoalCreate(BaseModel):
 class GoalUpdate(BaseModel):
     title: str
     description: Optional[str] = None
+
+class ProfileUpdate(BaseModel):
+    username: str
+    email: str

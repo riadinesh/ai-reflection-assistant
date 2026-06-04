@@ -18,7 +18,6 @@ def get_reflections(week_start: str, db: Session = Depends(get_db), current_user
 
 @router.post("/reflections")
 def upsert_reflection(reflection: ReflectionCreate, db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
-    print("THIS IS CURRENT USER: ", current_user.id)
     existing = db.query(models.Reflection).filter(
         models.Reflection.week_start == reflection.week_start,
         models.Reflection.day == reflection.day,
