@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 resend.api_key = os.getenv("RESEND_API_KEY")
 
-FROM_EMAIL = os.getenv("RESEND_FROM", "Reflections <onboarding@resend.dev>")
+FROM_EMAIL = os.getenv("RESEND_FROM", "reflections@my-reflection-app.com")
 
 def createMessage(summary):
     week_start = summary['week_start']
@@ -25,8 +25,8 @@ def sendEmail(summary, week_start, week_end, email):
     }
     try:
         print("Sending email...")
-        # response = resend.Emails.send(params)
-        # print(f"Email sent: {response}")
+        response = resend.Emails.send(params)
+        print(f"Email sent: {response}")
     except Exception as e:
         # Non-fatal: the summary is already saved and returned, so a failed
         # send should be logged but never crash the background task.
