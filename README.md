@@ -2,9 +2,9 @@
 
 A personal growth tool for tracking daily reflections against your big-picture goals. Every Sunday, it generates a weekly AI summary and emails it to you — covering what you accomplished, goals you made progress on, and next steps for the week ahead.
 
-> 🔗 **Live demo:** https://your-app.vercel.app  <!-- replace with your real Vercel/custom domain -->
+> 🔗 **Live demo:** https://my-reflection-app.com/  <!-- replace with your real Vercel/custom domain -->
 
-<img width="1473" height="765" alt="Screenshot 2026-03-12 at 11 52 21 PM" src="https://github.com/user-attachments/assets/e5e42b8f-3073-48f5-9f38-642eb538729a" />
+<img width="1631" height="882" alt="Screenshot 2026-06-05 at 4 30 15 PM" src="https://github.com/user-attachments/assets/f4841d55-ad97-40ff-9351-bf9be5d66604" />
 
 ## Problem Statement
 
