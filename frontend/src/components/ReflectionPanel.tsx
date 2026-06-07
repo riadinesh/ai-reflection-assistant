@@ -8,8 +8,18 @@ export default function ReflectionPanel() {
     const { days, reflectionMap, dateRangeLabel, handleContentChange, handleKeyPress, goToPreviousWeek, goToNextWeek, isCurrentWeek } = reflectionActions()
     const [summarizing, setSummarizing] = useState(false)
     const [summary, setSummary] = useState<Summary | null>(null)
+    const [notice, setNotice] = useState("")
 
     async function handleGenerateSummary() {
+        // don't generate if every day is empty
+        const hasContent = days.some(day => (reflectionMap[day]?.content ?? "").trim() !== "")
+        if (!hasContent) {
+            setNotice("please fill out at least one reflection before generating a summary.")
+            setTimeout(() => setNotice(""), 4000)
+            return
+        }
+
+        setNotice("")
         setSummarizing(true)
         try {
             const res = await fetch(`${API_URL}/summarize`, {
@@ -54,6 +64,7 @@ export default function ReflectionPanel() {
                 ))}
             </ul>
             <div className="reflection-footer">
+                {notice && <span className="reflection-notice">{notice}</span>}
                 <button className="generate-summary-btn" onClick={handleGenerateSummary} disabled={summarizing}>
                     {summarizing ? 'generating...' : 'generate summary'}
                 </button>
