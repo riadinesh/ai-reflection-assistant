@@ -12,13 +12,11 @@ router = APIRouter()
 
 @router.get("/goals")
 def get_goals(db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
-    print("current user: ", current_user)
     goals = db.query(models.Goal).filter(models.Goal.user_id == current_user.id).all()
     return [{"id": g.id, "title": g.title, "description": g.description or ""} for g in goals]
 
 @router.post("/goals")
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db), current_user = Depends(_get_current_user)):
-    print("THIS IS CURRENT USER: ", current_user.id)
     db_goal = models.Goal(**goal.model_dump(), user_id=current_user.id)
     db.add(db_goal)
     db.commit()
